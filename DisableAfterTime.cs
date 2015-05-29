@@ -67,12 +67,13 @@ namespace DisableAfterTimeEx {
         #endregion
 
         #region UNITY MESSAGES
+
         private void Start() {
             if (!TargetGO) {
                 Utilities.MissingReference(this, "target");
             }
 
-            Invoke("DisableTarget", Delay);
+            Invoke("DisableTargetGO", Delay);
         }
 
         #endregion
