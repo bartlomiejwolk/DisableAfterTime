@@ -19,10 +19,28 @@ namespace DisableAfterTimeEx {
         public override void OnInspectorGUI() {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(targetGO);
-            EditorGUILayout.PropertyField(delay);
+            DrawTargetGOField();
+            DrawDelayField();
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawDelayField() {
+
+            EditorGUILayout.PropertyField(
+                delay,
+                new GUIContent(
+                    "Delay",
+                    "Delay before disabling target game object."));
+        }
+
+        private void DrawTargetGOField() {
+
+            EditorGUILayout.PropertyField(
+                targetGO,
+                new GUIContent(
+                    "Target",
+                    "Game object to be disabled."));
         }
 
     }
