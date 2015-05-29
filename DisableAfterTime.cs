@@ -11,18 +11,30 @@ namespace DisableAfterTimeEx {
 
         /// Delay before disabling the target game object.
         [SerializeField]
-        private float delay = 0;
+        private float delay;
+
+        /// Game object to disable.
+        public GameObject TargetGO {
+            get { return targetGO; }
+            set { targetGO = value; }
+        }
+
+        /// Delay before disabling the target game object.
+        public float Delay {
+            get { return delay; }
+            set { delay = value; }
+        }
 
         private void Start () {
-            if (!targetGO) {
+            if (!TargetGO) {
                 Utilities.MissingReference(this, "target");
             }
 
-            Invoke("DisableTarget", delay);
+            Invoke("DisableTarget", Delay);
         }
 
         private void DisableTargetGO() {
-            targetGO.SetActive(false);
+            TargetGO.SetActive(false);
         }
     }
 }
