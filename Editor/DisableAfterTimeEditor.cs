@@ -11,11 +11,28 @@ namespace DisableAfterTimeEx {
     [CustomEditor(typeof (DisableAfterTime))]
     public class DisableAfterTimeEditor : Editor {
 
+        #region SERIALIZED PROPERTIES
+
         private SerializedProperty delay;
         private SerializedProperty targetGO;
+        private SerializedProperty description;
+
+        #endregion
+
+        #region UNITY MESSAGES
+        private void OnEnable() {
+            targetGO = serializedObject.FindProperty("targetGO");
+            delay = serializedObject.FindProperty("delay");
+            description = serializedObject.FindProperty("description");
+        }
 
         public override void OnInspectorGUI() {
             serializedObject.Update();
+
+            DrawVersionLabel();
+            DrawDescriptionTextArea();
+
+            EditorGUILayout.Space();
 
             DrawTargetGOField();
             DrawDelayField();
@@ -23,8 +40,10 @@ namespace DisableAfterTimeEx {
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawDelayField() {
+        #endregion
 
+        #region INSPECTOR
+        private void DrawDelayField() {
             EditorGUILayout.PropertyField(
                 delay,
                 new GUIContent(
@@ -33,7 +52,6 @@ namespace DisableAfterTimeEx {
         }
 
         private void DrawTargetGOField() {
-
             EditorGUILayout.PropertyField(
                 targetGO,
                 new GUIContent(
@@ -41,11 +59,32 @@ namespace DisableAfterTimeEx {
                     "Game object to be disabled."));
         }
 
-        private void OnEnable() {
-            targetGO = serializedObject.FindProperty("targetGO");
-            delay = serializedObject.FindProperty("delay");
+        private void DrawVersionLabel() {
+            EditorGUILayout.LabelField(
+                string.Format(
+                    "{0} ({1})",
+                    DisableAfterTime.Version,
+                    DisableAfterTime.Extension));
         }
 
+        private void DrawDescriptionTextArea() {
+            description.stringValue = EditorGUILayout.TextArea(
+                description.stringValue);
+        }
+ 
+        #endregion
+
+        #region METHODS
+
+        [MenuItem("Component/DisableAfterTime")]
+        private static void AddEntryToComponentMenu() {
+            if (Selection.activeGameObject != null) {
+                Selection.activeGameObject.AddComponent(
+                    typeof(DisableAfterTime));
+            }
+        }
+
+        #endregion METHODS
     }
 
 }

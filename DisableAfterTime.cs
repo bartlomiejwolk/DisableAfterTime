@@ -10,13 +10,42 @@ namespace DisableAfterTimeEx {
     // todo move comments to properties
     public class DisableAfterTime : MonoBehaviour {
 
+        #region CONSTANTS
+
+        public const string Version = "v0.1.0";
+        public const string Extension = "DisableAfterTime";
+
+        #endregion
+
+        #region FIELDS
+
+#pragma warning disable 0414
+        /// <summary>
+        ///     Allows identify component in the scene file when reading it with
+        ///     text editor.
+        /// </summary>
+        [SerializeField]
+        private string componentName = "DisableAfterTime";
+#pragma warning restore0414
+
+        #endregion
+
+        #region INSPECTOR FIELDS
+        /// Game object to disable.
+        [SerializeField]
+        private GameObject targetGO;
+
         /// Delay before disabling the target game object.
         [SerializeField]
         private float delay;
 
-        /// Game object to disable.
+
         [SerializeField]
-        private GameObject targetGO;
+        private string description = "Description";
+
+        #endregion
+
+        #region PROPERTIES
 
         /// Delay before disabling the target game object.
         public float Delay {
@@ -30,10 +59,14 @@ namespace DisableAfterTimeEx {
             set { targetGO = value; }
         }
 
-        private void DisableTargetGO() {
-            TargetGO.SetActive(false);
+        public string Description {
+            get { return description; }
+            set { description = value; }
         }
 
+        #endregion
+
+        #region UNITY MESSAGES
         private void Start() {
             if (!TargetGO) {
                 Utilities.MissingReference(this, "target");
@@ -41,6 +74,15 @@ namespace DisableAfterTimeEx {
 
             Invoke("DisableTarget", Delay);
         }
+
+        #endregion
+
+        #region METHODS
+        private void DisableTargetGO() {
+            TargetGO.SetActive(false);
+        }
+
+        #endregion
 
     }
 
