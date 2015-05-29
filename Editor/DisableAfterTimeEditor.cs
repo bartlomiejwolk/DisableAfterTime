@@ -8,19 +8,19 @@ namespace DisableAfterTimeEx {
     [CustomEditor(typeof (DisableAfterTime))]
     public class DisableAfterTimeEditor : Editor {
 
-        private SerializedProperty _target;
-        private SerializedProperty _delay;
+        private SerializedProperty targetGO;
+        private SerializedProperty delay;
 
         private void OnEnable() {
-            _target = serializedObject.FindProperty("_target");
-            _delay = serializedObject.FindProperty("_delay");
+            targetGO = serializedObject.FindProperty("targetGO");
+            delay = serializedObject.FindProperty("delay");
         }
 
         public override void OnInspectorGUI() {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(_target);
-            EditorGUILayout.PropertyField(_delay);
+            EditorGUILayout.PropertyField(targetGO);
+            EditorGUILayout.PropertyField(delay);
 
             serializedObject.ApplyModifiedProperties();
         }
