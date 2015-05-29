@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
-using OneDayGame;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace DisableAfterTimeEx {
 
