@@ -13,7 +13,7 @@ Extensions with version below 1.0.0 are considered to be pre/alpha and may not w
 
 ## Resources
 
-* [Blog post]()
+* [Blog post](https://bartlomiejwolk.wordpress.com/2015/05/29/disable-after-time/)
 
 ## Quick Start
 
